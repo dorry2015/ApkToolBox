@@ -47,6 +47,7 @@ namespace AutoAPKTool
 
         private const int ExcuteJava = 0;
         private const int ExcuteCmd = 1;
+        private const int ExcutePython = 0;
 
         private void Excute(int flag, object args, bool isshow)
         {
@@ -57,13 +58,18 @@ namespace AutoAPKTool
                 _apkinfo = "";
             }
 
-            if (flag == 0)
-                sh = "java.exe";
-            else if (flag == 1)
+            switch(flag)
             {
-                sh = "cmd.exe";
+                case 0:
+                    sh = "java.exe";
+                    break;
+                case 1:
+                    sh = "cmd.exe";
+                    break;
+                case 2:
+                    sh = "Python.exe";
+                    break;
             }
-
             var processStartInfo = new ProcessStartInfo(sh, args.ToString())
             {
                 UseShellExecute = false,
@@ -527,6 +533,42 @@ namespace AutoAPKTool
         private void OpenSourceUrl_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/Qrilee/ApkToolBox");
+        }
+
+        private void btn_frida_js_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("拖拽对象到此按钮\nsmali或者包含smali的文件夹");
+        }
+
+        private void btn_frida_js_DragDrop(object sender, DragEventArgs e)
+        {
+            var fileInfo = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            //提取文件夹里的smali文件
+            var filePath = "";
+            foreach (var fileNode in fileInfo)
+            {
+                if(Directory.Exists(fileNode))
+                {
+                    string[] files = Directory.GetFiles(fileNode, "*.smali", SearchOption.AllDirectories);
+                    filePath += string.Join(" ", files, 0, files.Length);
+                }
+                else
+                {
+                    filePath += string.Join(" ", fileNode, 0, fileNode.Length);
+                }
+            }
+            
+            MessageBox.Show(filePath);
+            if(filePath.Length > 1)
+            {
+
+            }
+            //new Thread(() => { Excute(ExcutePython, filePath, true); }).Start();
+        }
+
+        private void btn_frida_js_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop, false) ? DragDropEffects.Copy : DragDropEffects.None;
         }
     }
 }

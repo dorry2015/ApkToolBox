@@ -53,11 +53,13 @@
             this.博客ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.吾爱破解ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSourceUrl = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_frida_js = new System.Windows.Forms.Button();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // open_path
             // 
+            this.open_path.AllowDrop = true;
             this.open_path.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.open_path.Location = new System.Drawing.Point(56, 36);
             this.open_path.Margin = new System.Windows.Forms.Padding(6);
@@ -65,6 +67,8 @@
             this.open_path.ReadOnly = true;
             this.open_path.Size = new System.Drawing.Size(347, 26);
             this.open_path.TabIndex = 0;
+            this.open_path.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
+            this.open_path.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             // 
             // btn_Decompiler
             // 
@@ -151,7 +155,7 @@
             // Log
             // 
             this.Log.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Log.Location = new System.Drawing.Point(12, 201);
+            this.Log.Location = new System.Drawing.Point(12, 381);
             this.Log.Multiline = true;
             this.Log.Name = "Log";
             this.Log.ReadOnly = true;
@@ -246,7 +250,7 @@
             this.关于ToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(501, 25);
+            this.menu.Size = new System.Drawing.Size(758, 25);
             this.menu.TabIndex = 19;
             this.menu.Text = "配置";
             // 
@@ -292,30 +296,45 @@
             // 博客ToolStripMenuItem
             // 
             this.博客ToolStripMenuItem.Name = "博客ToolStripMenuItem";
-            this.博客ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.博客ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.博客ToolStripMenuItem.Text = "博客";
             this.博客ToolStripMenuItem.Click += new System.EventHandler(this.Btn_BlogClick);
             // 
             // 吾爱破解ToolStripMenuItem
             // 
             this.吾爱破解ToolStripMenuItem.Name = "吾爱破解ToolStripMenuItem";
-            this.吾爱破解ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.吾爱破解ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.吾爱破解ToolStripMenuItem.Text = "吾爱破解";
             this.吾爱破解ToolStripMenuItem.Click += new System.EventHandler(this.Btn_52pojieClick);
             // 
             // OpenSourceUrl
             // 
             this.OpenSourceUrl.Name = "OpenSourceUrl";
-            this.OpenSourceUrl.Size = new System.Drawing.Size(152, 22);
+            this.OpenSourceUrl.Size = new System.Drawing.Size(124, 22);
             this.OpenSourceUrl.Text = "开源地址";
             this.OpenSourceUrl.Click += new System.EventHandler(this.OpenSourceUrl_Click);
+            // 
+            // btn_frida_js
+            // 
+            this.btn_frida_js.AllowDrop = true;
+            this.btn_frida_js.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_frida_js.Location = new System.Drawing.Point(18, 210);
+            this.btn_frida_js.Name = "btn_frida_js";
+            this.btn_frida_js.Size = new System.Drawing.Size(95, 31);
+            this.btn_frida_js.TabIndex = 20;
+            this.btn_frida_js.Text = "生成frida JS";
+            this.btn_frida_js.UseVisualStyleBackColor = true;
+            this.btn_frida_js.Click += new System.EventHandler(this.btn_frida_js_Click);
+            this.btn_frida_js.DragDrop += new System.Windows.Forms.DragEventHandler(this.btn_frida_js_DragDrop);
+            this.btn_frida_js.DragEnter += new System.Windows.Forms.DragEventHandler(this.btn_frida_js_DragEnter);
             // 
             // MainUI
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(501, 448);
+            this.ClientSize = new System.Drawing.Size(758, 628);
+            this.Controls.Add(this.btn_frida_js);
             this.Controls.Add(this.getArgs);
             this.Controls.Add(this.dec_odex);
             this.Controls.Add(this.my_sign);
@@ -342,10 +361,8 @@
             this.MaximizeBox = false;
             this.Name = "MainUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Apktool Box v1.6.4";
+            this.Text = "APKReverseKit";
             this.Load += new System.EventHandler(this.MainUI_Load);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             this.ResumeLayout(false);
@@ -378,6 +395,7 @@
         private System.Windows.Forms.ToolStripMenuItem arm转机器码ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 打开jadxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OpenSourceUrl;
+        private System.Windows.Forms.Button btn_frida_js;
     }
 }
 
